@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · BudgetBuddy{% endblock %}
+{% block content %}
+<h1>Hi, {{ user.first_name }}</h1>
+<p class="sub">Your BudgetBuddy dashboard.</p>
+<div class="grid">
+  <div class="card stat"><span class="muted">Total expenses</span><b>—</b></div>
+  <div class="card stat"><span class="muted">Budget</span><b>—</b></div>
+  <div class="card stat"><span class="muted">Remaining</span><b>—</b></div>
+</div>
+<h2>Recent transactions</h2>
+<div class="card"><p class="muted">Expense tracking and budgets arrive in the next phase. For now you can <a href="{% url 'profile' %}">update your profile</a>.</p></div>
+{% endblock %}

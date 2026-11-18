@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Admin dashboard · BudgetBuddy{% endblock %}
+{% block content %}
+<h1>Admin dashboard</h1>
+<p class="sub">Signed in as {{ user.email }}.</p>
+<div class="grid">
+  <div class="card stat"><span class="muted">Registered users</span><b>{{ total_users }}</b></div>
+</div>
+<h2>Newest users</h2>
+<div class="card">
+  {% if recent_users %}
+  <table>
+    <tr><th>Name</th><th>Email</th><th>Joined</th></tr>
+    {% for u in recent_users %}
+    <tr><td>{{ u.first_name }} {{ u.last_name }}</td><td>{{ u.email }}</td><td>{{ u.date_joined|date:"M d, Y" }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}<p class="muted">No registered users yet.</p>{% endif %}
+  <p><a href="{% url 'admin:index' %}">Open Django admin</a></p>
+</div>
+{% endblock %}

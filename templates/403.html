@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Access denied · BudgetBuddy{% endblock %}
+{% block content %}
+<div class="card auth">
+  <h1>Access denied</h1>
+  <p class="sub">This page is for a different type of account.</p>
+  {% if user.is_authenticated %}<a class="btn" href="{% url 'dashboard' %}">Go to my dashboard</a>{% else %}<a class="btn" href="{% url 'login' %}">Log in</a>{% endif %}
+</div>
+{% endblock %}
