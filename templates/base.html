@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}BudgetBuddy{% endblock %}</title>
+<style>
+:root{--ink:#18262b;--muted:#5c6b70;--line:#d5dedd;--bg:#eef2f1;--card:#fff;--brand:#0f5c4d;--brand-dark:#0a4337;--coin:#e0a526;--bad:#b3261e;--ok:#136c3a}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+a{color:var(--brand)}
+.nav{display:flex;align-items:center;gap:1.25rem;padding:.8rem 1.5rem;background:var(--brand);color:#fff}
+.nav a,.nav button{color:#fff;text-decoration:none;background:none;border:0;font:inherit;cursor:pointer;padding:0}
+.nav a:hover,.nav button:hover{text-decoration:underline}
+.brand{font-weight:700;font-size:1.2rem;margin-right:auto;border-bottom:3px solid var(--coin)}
+.wrap{max-width:960px;margin:0 auto;padding:1.5rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.5rem}
+.auth{max-width:440px;margin:2rem auto}
+h1{margin:0 0 .25rem;font-size:1.6rem}h2{font-size:1.15rem;margin:1.5rem 0 .5rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.field{margin-bottom:1rem}
+label{display:block;font-weight:600;margin-bottom:.25rem}
+input{width:100%;padding:.6rem .7rem;border:1px solid #9fb0ad;border-radius:6px;font:inherit}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--coin);outline-offset:2px}
+small{display:block;color:var(--muted);margin-top:.25rem}
+small ul{margin:.25rem 0 0 1.1rem;padding:0}
+.err{color:var(--bad);margin:.25rem 0 0;font-size:.92rem}
+.btn{display:inline-block;background:var(--brand);color:#fff;border:0;border-radius:6px;padding:.65rem 1.1rem;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--brand-dark)}
+.msg{padding:.7rem 1rem;border-radius:6px;margin-bottom:1rem;border:1px solid}
+.msg.success{background:#e6f4ea;border-color:#9ccfae;color:var(--ok)}
+.msg.error{background:#fdecea;border-color:#e5a5a0;color:var(--bad)}
+.msg.info{background:#e8f0fe;border-color:#a8c0ef;color:#1a3d8f}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.stat{border-left:4px solid var(--coin);padding-left:.8rem}
+.stat b{display:block;font-size:1.5rem}
+.muted{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:background .15s}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="{% url 'dashboard' %}">BudgetBuddy</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'profile' %}">Profile</a>
+    <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit">Log out</button></form>
+  {% else %}
+    <a href="{% url 'login' %}">Log in</a>
+    <a href="{% url 'register' %}">Register</a>
+  {% endif %}
+</nav>
+<main class="wrap">
+  {% for m in messages %}<div class="msg {{ m.tags }}" role="status">{{ m }}</div>{% endfor %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

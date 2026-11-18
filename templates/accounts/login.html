@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Log in · BudgetBuddy{% endblock %}
+{% block content %}
+<div class="card auth">
+  <h1>Log in</h1>
+  <p class="sub">Use the email you registered with.</p>
+  <form method="post" novalidate>{% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% include "accounts/_form.html" %}
+    <button class="btn" type="submit">Log in</button>
+  </form>
+  <p class="muted">New here? <a href="{% url 'register' %}">Create an account</a></p>
+</div>
+{% endblock %}
