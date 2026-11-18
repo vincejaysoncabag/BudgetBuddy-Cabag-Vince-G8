@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Profile · BudgetBuddy{% endblock %}
+{% block content %}
+<div class="card auth">
+  <h1>Your profile</h1>
+  <p class="sub">Role: {{ user.get_role_display }} · Joined {{ user.date_joined|date:"M d, Y" }}</p>
+  <form method="post" novalidate>{% csrf_token %}
+    {% include "accounts/_form.html" %}
+    <button class="btn" type="submit">Save changes</button>
+  </form>
+  <p><a href="{% url 'change_password' %}">Change password</a></p>
+</div>
+{% endblock %}
